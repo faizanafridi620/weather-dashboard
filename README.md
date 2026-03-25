@@ -1,16 +1,157 @@
-# React + Vite
+# 🌦 Weather Dashboard (ReactJS)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive and high-performance weather dashboard built using ReactJS that provides **real-time and historical weather insights** using the Open-Meteo API.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 Project Overview
 
-## React Compiler
+This application fetches the user’s **live location via browser GPS** and displays:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* 🌤 Current weather conditions
+* 📊 Hourly weather data with interactive charts
+* 📈 Historical weather trends (up to 2 years)
 
-## Expanding the ESLint configuration
+The app is optimized for **performance, responsiveness, and user experience**.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## ⚙️ Tech Stack
+
+* ⚛️ React (Vite)
+* 🎨 Tailwind CSS
+* 📊 Recharts (Charts & Graphs)
+* 📅 React Datepicker
+* 🌐 Axios (API calls)
+* ☁️ Open-Meteo API
+
+---
+
+## ✨ Features
+
+### 📍 Location-Based Weather
+
+* Automatically detects user location using browser GPS
+* Displays localized weather data instantly
+
+---
+
+### 🌡 Current Weather (Page 1)
+
+* Temperature (Min, Max, Current)
+* Precipitation
+* Relative Humidity
+* UV Index
+* Sunrise & Sunset
+* Wind Speed
+* Precipitation Probability
+
+---
+
+### 🌫 Air Quality Data
+
+* PM10 & PM2.5
+* CO, CO2, NO2, SO2
+
+---
+
+### 📊 Hourly Forecast
+
+* Temperature (°C ↔ °F toggle)
+* Relative Humidity
+* Precipitation
+* Visibility
+* Wind Speed
+* Air Quality (PM10 & PM2.5 combined graph)
+
+---
+
+### 📈 Historical Data (Page 2)
+
+* Select custom date range (max 2 years)
+* Displays:
+
+  * Mean, Max, Min Temperature
+  * Sunrise & Sunset (IST)
+  * Precipitation trends
+  * Wind Speed & Direction
+
+---
+
+### 📉 Interactive Charts
+
+* Line & Bar chart toggle
+* Zoom functionality (Brush)
+* Horizontal scrolling
+* Multi-line charts for comparison
+
+---
+
+## ⚡ Performance Optimizations
+
+* 🚀 Parallel API calls using `Promise.all`
+* 💾 Data caching using `localStorage`
+* 🧠 Memoization using `useMemo`
+
+---
+
+## 📱 Responsive Design
+
+* Fully mobile-friendly UI
+* Adaptive chart rendering
+* Optimized layouts for all screen sizes
+
+---
+
+## 🧩 Project Structure
+
+```
+src/
+├── components/
+│   ├── Navbar.jsx
+│   ├── WeatherCard.jsx
+│   ├── WeatherChart.jsx
+│   ├── ToggleTemp.jsx
+│   ├── ToggleGraph.jsx
+│
+├── pages/
+│   ├── Home.jsx
+│   ├── History.jsx
+│
+├── services/
+│   ├── weatherApi.js
+│
+├── utils/
+│   ├── getLocation.js
+│
+├── App.jsx
+├── main.jsx
+```
+
+---
+
+## 🛠 Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/your-username/weather-dashboard.git
+
+# Navigate into project
+cd weather-dashboard
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+---
+
+
+## ⚠️ Important Notes
+
+* Allow **location access** for correct weather data
+* Internet connection required for API calls
+
+---
