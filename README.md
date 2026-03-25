@@ -132,19 +132,21 @@ src/
 
 ## 🛠 Installation & Setup
 
-```bash
 # Clone the repository
+```bash
 git clone https://github.com/your-username/weather-dashboard.git
 
 # Navigate into project
+```bash
 cd weather-dashboard
 
 # Install dependencies
+```bash
 npm install
 
 # Start development server
+```bash
 npm run dev
-```
 
 ---
 
