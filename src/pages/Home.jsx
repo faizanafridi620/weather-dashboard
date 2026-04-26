@@ -18,6 +18,7 @@ function Home() {
 
    const getWeather = async () => {
       try {
+        let lat,lon;
 
         setLoading(true);
         setLocationError(false);
@@ -30,7 +31,24 @@ function Home() {
         //   setAqi(parsed.aqi);
         // }
 
-        const { lat, lon } = await getLocation();
+        const cachedCoords = localStorage.getItem("coords");
+
+        if (cachedCoords) {
+          const parsed = JSON.parse(cachedCoords);
+          lat = parsed.lat
+          lon = parsed.lon
+        } else {
+          const location = await getLocation();
+          lat = location.lat;
+          lon = location.lon;
+
+          localStorage.setItem("coords", JSON.stringify({
+            lat,
+            lon
+          }))
+        }
+
+        // const { lat, lon } = await getLocation();
 
         const [res, resAqi] = await Promise.all([
           fetchWeather(lat, lon),

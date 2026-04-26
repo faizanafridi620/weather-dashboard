@@ -87,7 +87,7 @@ function WeatherChart({ title, data, chartType = "line" }) {
     <div className="bg-white/80 backdrop-blur-md p-5 rounded-2xl shadow-lg">
       <h2 className="mb-3 font-semibold text-lg text-gray-700">{title}</h2>
       <button 
-      className="px-3 py-1 text-sm bg-blue-500 text-white rounded"
+      className="px-3 py-1 text-sm bg-blue-600 text-white rounded cursor-pointer"
       onClick={() => chartRef.current.resetZoom()}
       >
         Reset
