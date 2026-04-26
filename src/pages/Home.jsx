@@ -9,21 +9,26 @@ function Home() {
   const [data, setData] = useState(null);
   const [aqi, setAqi] = useState(null);
   const [tempUnit, setTempUnit] = useState("C");
+  const [loading, setLoading] = useState(false);
+  const [locationError, setLocationError] = useState(false);
 
   const convertTemp = (temp, unit) => {
     return unit === "C" ? temp : (temp * 9) / 5 + 32;
   };
 
-  useEffect(() => {
-    const getWeather = async () => {
+   const getWeather = async () => {
       try {
-        const cached = localStorage.getItem("weatherData");
 
-        if (cached) {
-          const parsed = JSON.parse(cached);
-          setData(parsed.data);
-          setAqi(parsed.aqi);
-        }
+        setLoading(true);
+        setLocationError(false);
+
+        // const cached = localStorage.getItem("weatherData");
+
+        // if (cached) {
+        //   const parsed = JSON.parse(cached);
+        //   setData(parsed.data);
+        //   setAqi(parsed.aqi);
+        // }
 
         const { lat, lon } = await getLocation();
 
@@ -42,11 +47,31 @@ function Home() {
           }),
         );
       } catch (error) {
-        return <h1>{error.message}</h1>;
+        console.error(error);
+        setLocationError(true);
+        
+      }finally {
+        setLoading(false);
       }
     };
+
+  useEffect(() => {
+     const cached = localStorage.getItem("weatherData");
+
+  if (cached) {
+    const parsed = JSON.parse(cached);
+    setData(parsed.data);
+    setAqi(parsed.aqi);
+  }
     getWeather();
   }, []);
+
+
+//   useEffect(() => {
+
+// }, []);
+
+  // const hasCache = localStorage.getItem("weatherData")
 
   const dataTemp = useMemo(() => {
     if (!data) return [];
@@ -120,7 +145,32 @@ function Home() {
     }));
   }, [data, aqi]);
 
-  if (!data) return <div className="p-6 animate-pulse">Loading Weather...</div>;
+
+  if (!data && !loading && !locationError) {
+  return (
+    <div className="flex flex-col items-center justify-center h-screen gap-4">
+      <p>Click below to get your weather</p>
+      <button onClick={getWeather}>Get My Weather</button>
+    </div>
+  );
+}
+
+    // if (!data && !hasCache) return <div className="p-6 animate-pulse">Loading Weather...</div>;
+
+
+  if (loading) return <div className="p-6 animate-pulse">Loading Weather...</div>;
+
+    if (!data && locationError) return (
+    <div className="text-center p-6">
+      <p className="text-red-500">
+        Please allow Location access to to view weather data
+      </p>
+      <button className="px-4 py-1 rounded cursor-pointer bg-blue-600 text-white" 
+      onClick={getWeather}>
+        Allow Location
+      </button>
+    </div>
+  )
 
   return (
     <>
