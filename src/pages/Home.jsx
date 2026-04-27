@@ -23,14 +23,6 @@ function Home() {
         setLoading(true);
         setLocationError(false);
 
-        // const cached = localStorage.getItem("weatherData");
-
-        // if (cached) {
-        //   const parsed = JSON.parse(cached);
-        //   setData(parsed.data);
-        //   setAqi(parsed.aqi);
-        // }
-
         const cachedCoords = localStorage.getItem("coords");
 
         if (cachedCoords) {
@@ -47,8 +39,6 @@ function Home() {
             lon
           }))
         }
-
-        // const { lat, lon } = await getLocation();
 
         const [res, resAqi] = await Promise.all([
           fetchWeather(lat, lon),
@@ -84,12 +74,6 @@ function Home() {
     getWeather();
   }, []);
 
-
-//   useEffect(() => {
-
-// }, []);
-
-  // const hasCache = localStorage.getItem("weatherData")
 
   const dataTemp = useMemo(() => {
     if (!data) return [];
@@ -173,10 +157,8 @@ function Home() {
   );
 }
 
-    // if (!data && !hasCache) return <div className="p-6 animate-pulse">Loading Weather...</div>;
 
-
-  if (loading) return <div className="p-6 animate-pulse">Loading Weather...</div>;
+  if (loading && !data) return <div className="p-6 animate-pulse">Loading Weather...</div>;
 
     if (!data && locationError) return (
     <div className="text-center p-6">
